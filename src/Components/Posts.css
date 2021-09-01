@@ -1,0 +1,74 @@
+.post{
+    margin-top: 15px;
+    margin-left: 20px;
+    background-color: rgb(255,255,255);
+    border: 1px solid lightgray;
+    width: 95%;  
+    margin-bottom: 20px;
+}
+/* .post::-webkit-scrollbar{
+    width: 10px;
+} */
+.post_avatar{
+    margin-right: 10px;
+   
+}
+.post_header{
+    display: flex;
+    height: 7vh;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    
+    padding-bottom: 5px;
+}
+.post_header_username{
+    margin-left: 15px;
+}
+
+.specific_post{
+    object-fit: contain;
+    width: 100%;  
+    cursor: pointer;
+    height: 500px;
+}
+.post_bottom_section > p{
+    margin-left: 20px;
+
+}
+.post_react{
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.post_comments{
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.post_commentBox{
+    display: flex;
+    margin: 20px;
+}
+.post_commentBox > input{
+    flex: 1;
+    border: none;
+    outline: none;
+}
+.post_commentBox > button{
+    flex: 0;
+    border: none;
+    background-color: transparent;
+    color: #6082a3;
+    cursor: pointer;
+}
+.viewOthercommnt:hover{
+    cursor: pointer;   
+}
+@media only screen and (max-width: 702px){
+    .post{
+        margin-left: 15px;
+    }
+}

@@ -1,0 +1,32 @@
+.header{
+    background-color: rgb(255,255,255);
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #d3d3d3;
+    width: 100%;
+}
+.header_logo{
+    object-fit: contain;
+    height: 100%;
+    width: 100px;
+    margin-left: 15px;
+}
+.header_account_handle {
+    display: flex;
+   margin-top: 15px;
+   margin-right: 10px;
+    
+}
+.header_account_handle h4{
+    margin-left: 15px;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.logout_button:hover{
+    cursor: pointer;
+    
+}

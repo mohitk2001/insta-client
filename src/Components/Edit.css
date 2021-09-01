@@ -1,0 +1,44 @@
+.edit{
+    height: 100vh;
+    width: 70%;
+    margin: auto;
+}
+
+.edits_fields {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.edits_fields>h4{
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.edits_fields > input{
+    background: #FAFAFA;
+    border: 1px solid lightgrey;
+    outline: none;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+input[type="file"]{
+    width: 90%;
+    margin: auto;
+}
+.edits_fields > button{
+    background-color: rgb(178,223,252);
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 800;
+    height: 30px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+   
+    cursor: pointer;
+}

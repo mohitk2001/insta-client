@@ -1,0 +1,52 @@
+.authentication{
+    margin-top: 25px;  
+    border: 1px solid lightgrey;
+    width: 50vw;   
+}
+.authentication > p{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo_form{
+    
+    
+    width: 150px;
+    margin-top: 20px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+.authentication > form{
+    background-color: rgb(255,255,255);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 25px;
+}
+.authentication > form > input{
+    background: #FAFAFA;
+    border: 1px solid lightgrey;
+    outline: none;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.authentication > form > button{
+    background-color: rgb(178,223,252);
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 800;
+    height: 49px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 25px; cursor: pointer;
+}
+
+.auth{
+    display: grid;
+    place-items: center;
+}
