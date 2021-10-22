@@ -6,7 +6,7 @@ import { AuthContext } from "./Context.js";
 import { useContext } from "react";
 import { useHistory} from "react-router-dom";
 function Edit() {
-  const { isLogged, setIslogged } = useContext(AuthContext);
+  const { isLogged} = useContext(AuthContext);
   console.log(isLogged.id);
   const history=useHistory()
   const [username, setUsername] = useState("");
@@ -27,12 +27,12 @@ function Edit() {
           data
         )
           .then((res) => {
-            console.log(res.data);
+           // console.log(res.data);
             axios.patch("/update/profilePic",
               { imgurl: res.data.secure_url,id:isLogged.id },
               { headers: { accessToken: localStorage.getItem("accessToken") } }
             ).then((response)=>{
-                console.log(response)
+              //  console.log(response)
                 localStorage.removeItem("accessToken");
                 history.push("/login")
             })
@@ -52,7 +52,7 @@ function Edit() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         setUsername("");
         localStorage.removeItem("accessToken");
         history.push("/login")
@@ -67,7 +67,7 @@ function Edit() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         setName("");
         localStorage.removeItem("accessToken");
         history.push("/login")
@@ -82,7 +82,7 @@ function Edit() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         setEmail("");
         localStorage.removeItem("accessToken");
         history.push("/login")
@@ -97,7 +97,7 @@ function Edit() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((res) => {
-        console.log(res);
+       // console.log(res);
         if (res.data.error) {
           alert(res.data.error);
         } else {

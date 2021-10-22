@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useContext } from 'react'
-import {AuthContext} from "./Context"
+import { useContext } from "react";
+import { AuthContext } from "./Context";
 import "./Authentication.css";
 import { Link } from "react-router-dom";
 import axios from "./axios";
 import { useHistory } from "react-router";
-function Authentication() {
-  const {isLogged,setIslogged}=useContext(AuthContext)
 
+function Authentication() {
+  const { setIslogged } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,15 +24,14 @@ function Authentication() {
         if (res.data.error) {
           alert(res.data.error);
         } else if (!res.data.error) {
-          console.log(res.data)
-          console.log(res.data.auth_token);
-          localStorage.setItem("accessToken",res.data.auth_token)
+          localStorage.setItem("accessToken", res.data.auth_token);
           setIslogged({
-             name:res.data.username,
-             id:res.data._id,
-             loginstatus:true
-          })
-          history.push("/")
+            name: res.data.username,
+            id: res.data._id,
+            loginstatus: true,
+          });
+
+          history.push("/");
         }
       })
       .catch((err) => {

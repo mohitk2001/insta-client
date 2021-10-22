@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import "./Header.css";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./Context";
+import {add_details} from "../Redux/Action/index"
+import { useDispatch } from "react-redux";
 import axios from "./axios.js";
 function Header() {
   const { isLogged, setIslogged } = useContext(AuthContext);
-  console.log(isLogged);
-  const history=useHistory()
-  if(localStorage.getItem("accessToken")===null){
-    history.push("/login")
+  const dispatch=useDispatch()
+  const history = useHistory();
+  if (localStorage.getItem("accessToken") === null) {
+    history.push("/login");
   }
   useEffect(() => {
     axios
@@ -17,7 +19,6 @@ function Header() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((res) => {
-        console.log(res)
         if (res.data.error) {
           setIslogged({ ...isLogged, loginstatus: false });
         } else if (!res.data.error) {
@@ -31,15 +32,19 @@ function Header() {
       .catch((err) => {
         console.log(err);
       });
+      if(localStorage.getItem("accessToken")){
+        console.log(isLogged)
+        dispatch(add_details(isLogged))
+      }
   }, [isLogged.loginstatus]);
   const logout = () => {
     localStorage.removeItem("accessToken");
     setIslogged({
-        name:null,
-        id:null,
-        loginstatus:false,
-      });
-      history.push("/login")
+      name: null,
+      id: null,
+      loginstatus: false,
+    });
+    history.push("/login");
   };
   return (
     <div className="header">
@@ -51,18 +56,17 @@ function Header() {
         />
       </Link>
       <div className="header_account_handle">
-        {isLogged.loginstatus ? (<>
-            <h4 onClick={()=>history.push("/profile")}>{isLogged.name}</h4>
-          <h4 className="logout_button" onClick={logout}>Log out</h4>
-            </>
+        {isLogged.loginstatus ? (
+          <>
+            <h4 onClick={() => history.push("/profile")}>{isLogged.name}</h4>
+            <h4 className="logout_button" onClick={logout}>
+              Log out
+            </h4>
+          </>
         ) : (
           <>
-            <h4 onClick={()=>history.push("/login")}>
-              Sign In{" "}
-            </h4>
-            <h4 onClick={()=>history.push("/signup")}>
-              Sign Up
-            </h4>
+            <h4 onClick={() => history.push("/login")}>Sign In </h4>
+            <h4 onClick={() => history.push("/signup")}>Sign Up</h4>
           </>
         )}
       </div>

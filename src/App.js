@@ -10,28 +10,31 @@ import SignUp from "./Components/SignUp";
 import { AuthContext } from "./Components/Context";
 import Allcomments from "./Components/Allcomments";
 import Edit from "./Components/Edit";
+import ProfileBody from "./Components/ProfileBody";
+import Upload from "./Components/Upload";
+import { useSelector } from "react-redux";
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const mycounts=useSelector((state)=>state.add_Reducer)
+  
   const [isLogged, setIslogged] = useState({
     name: "",
     id: "",
     loginstatus: false,
   });
-
+  const reduxDetails=useSelector((state)=>console.log(state))
   useEffect(() => {
     axios
-      .get("/post/", {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
+      .get("/post/")
       .then((res) => {
-        console.log(res);
-        setPosts(res.data.data);
+        console.log(res.data);
+        setPosts(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [localStorage.getItem("accessToken")]);
+  },[mycounts]);
   return (
     <AuthContext.Provider value={{ isLogged, setIslogged }}>
       <Router>
@@ -50,6 +53,7 @@ function App() {
                         caption={post?.caption}
                         comments={post?.comments}
                         id={post?._id}
+                        avatar_url={post?.avatar_post}
                       />
                     );
                   })}
@@ -72,10 +76,15 @@ function App() {
             <Route path="/profile">
               <Header />
               <Profile />
+              <ProfileBody />
             </Route>
             <Route path="/edit">
               <Header />
               <Edit />
+            </Route>
+            <Route path="/upload">
+              <Header/>
+              <Upload/>
             </Route>
           </Switch>
         </div>

@@ -1,3 +1,13 @@
+.allcomments{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+#backBlur{
+    filter: blur(5px);
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.089);
+}
 .allcomments_image{  
     width: 100%;
    background-color: black;
@@ -17,6 +27,7 @@
 .users_details_top{
     display: flex;
     margin-bottom: 10px;
+  
 }
 .users_details{
     margin-left: 25px;
@@ -60,4 +71,23 @@
     background-color: transparent;
     color: #6082a3;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 320px){
+    .users_details_top > h2{
+        font-weight: 400;
+        font-size: 17px;
+    
+    }
+    .users_details{
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .onSmallsc{
+        font-size: 20px !important;
+    }
+    .comment_input>input{
+        font-size: 15px;
+    }
 }

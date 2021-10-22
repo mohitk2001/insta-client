@@ -12,7 +12,6 @@ function SignUp() {
 
   const register = async (e) => {
     e.preventDefault();
-    //console.log(name,username,email,password);
     const obj = {
       name: name,
       email: email,
@@ -23,7 +22,6 @@ function SignUp() {
     await axios
       .post("/user/signUp", { obj })
       .then((res) => {
-        //console.log(res);
         history.push("/login")
       })
       .catch((err) => {

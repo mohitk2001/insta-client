@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Allcomments.css";
 import { useParams } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
@@ -8,16 +8,21 @@ import ChatBubbleOutlineRoundedIcon from "@material-ui/icons/ChatBubbleOutlineRo
 import IconButton from "@material-ui/core/IconButton";
 import { AuthContext } from "./Context.js";
 import { useContext } from "react";
-
-
-const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop) 
+import { useSelector } from "react-redux";
+import EditIcon from "@material-ui/icons/Edit";
+import EditSlider from "./EditSlider";
+import $ from "jquery";
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 function Allcomments() {
   const { id } = useParams();
   const [post_details, setpost_Details] = useState({});
   const [comment, setcomment] = useState("");
-  const { isLogged, setIslogged } = useContext(AuthContext);
-  const myRef = useRef(null)
-   const executeScroll = () => scrollToRef(myRef)
+  const { isLogged } = useContext(AuthContext);
+  const [countComment, setcountComment] = useState("");
+  const similar = useSelector((state) => state.redux_data);
+
+  const myRef = useRef(null);
+  const executeScroll = () => scrollToRef(myRef);
   useEffect(() => {
     axios
       .get(`/post/postById/${id}`)
@@ -30,7 +35,7 @@ function Allcomments() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [countComment]);
   const postCommt = () => {
     const obj = {
       text: comment,
@@ -44,7 +49,8 @@ function Allcomments() {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((res) => {
-          console.log(res);
+          //console.log(res);
+          setcountComment((countComment) => countComment + 1);
         })
         .catch((err) => {
           console.log(err);
@@ -54,14 +60,20 @@ function Allcomments() {
     }
     setcomment("");
   };
+  const handleEdit = () => {
+   
+    $(".allcomments").attr("id","backBlur");
+    $(".editSlider").toggleClass("active")
+  };
   return (
-    <div className="allcomments">
+    <div>
+      <div className="allcomments">
       <div className="users_details">
         <div className="users_details_top">
           <Avatar
             className="post_avatar"
             alt={post_details?.username}
-            src={post_details?.imgUrl}
+            src={post_details?.avatar_post}
           />
           <h2>{post_details?.username}</h2>
         </div>
@@ -73,12 +85,17 @@ function Allcomments() {
       <center>
         <div className="allcomments_react">
           <IconButton>
-            <FavoriteBorderIcon fontSize="large" />
+            <FavoriteBorderIcon fontSize="large" className="onSmallsc"/>
           </IconButton>
 
           <IconButton onClick={executeScroll}>
-            <ChatBubbleOutlineRoundedIcon fontSize="large" />
+            <ChatBubbleOutlineRoundedIcon fontSize="large"  className="onSmallsc"/>
           </IconButton>
+          {similar?._id === post_details?.person_id_who_post && (
+            <IconButton onClick={handleEdit}>
+              <EditIcon className="onSmallsc" />
+            </IconButton>
+          )}
         </div>
       </center>
       <div className="comments_bottom">
@@ -96,13 +113,15 @@ function Allcomments() {
       <div className="comment_input" ref={myRef}>
         <input
           type="text"
-         
           placeholder="Add your comment"
           onChange={(e) => setcomment(e.target.value)}
           value={comment}
         />
         <button onClick={postCommt}>Post</button>
       </div>
+      
+    </div>
+    <EditSlider id={id}/>
     </div>
   );
 }
