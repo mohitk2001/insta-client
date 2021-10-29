@@ -7,6 +7,7 @@ import axios from "./axios.js";
 import { AuthContext } from "./Context.js";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import $ from "jquery"
 import IconButton from "@material-ui/core/IconButton";
 function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
   const [count, setCount] = useState(0);
@@ -15,7 +16,10 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
   const { isLogged } = useContext(AuthContext);
 
   useEffect(() => {}, [count]);
-
+  const handleLike=(id)=>{
+   
+    $(id).toggleClass("likeStyle");
+  }
   const postCommt = () => {
     const obj = {
       text: comment,
@@ -58,8 +62,8 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
 
       <div className="post_bottom_section">
         <div className="post_react">
-          <IconButton>
-            <FavoriteBorderIcon />
+          <IconButton  onClick={()=>handleLike(id)}>
+            <FavoriteBorderIcon className={id}/>
           </IconButton>
           <IconButton onClick={() => history.push(`/specific_post/${id}`)}>
             <ChatBubbleOutlineRoundedIcon />
