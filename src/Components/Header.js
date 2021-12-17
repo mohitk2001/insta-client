@@ -5,10 +5,13 @@ import { useContext } from "react";
 import { AuthContext } from "./Context";
 import {add_details} from "../Redux/Action/index"
 import { useDispatch } from "react-redux";
+
 import axios from "./axios.js";
 function Header() {
   const { isLogged, setIslogged } = useContext(AuthContext);
   const dispatch=useDispatch()
+  
+  
   const history = useHistory();
   if (localStorage.getItem("accessToken") === null) {
     history.push("/login");
@@ -19,6 +22,7 @@ function Header() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((res) => {
+        console.log(res.data)
         if (res.data.error) {
           setIslogged({ ...isLogged, loginstatus: false });
         } else if (!res.data.error) {
@@ -37,6 +41,7 @@ function Header() {
         dispatch(add_details(isLogged))
       }
   }, [isLogged.loginstatus]);
+ 
   const logout = () => {
     localStorage.removeItem("accessToken");
     setIslogged({

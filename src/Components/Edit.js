@@ -5,9 +5,11 @@ import Axios from "axios";
 import { AuthContext } from "./Context.js";
 import { useContext } from "react";
 import { useHistory} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {Add_for_Post} from "../Redux/Action/index"
 function Edit() {
   const { isLogged} = useContext(AuthContext);
-  console.log(isLogged.id);
+  const dispatch=new useDispatch();
   const history=useHistory()
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -55,7 +57,9 @@ function Edit() {
         //console.log(res);
         setUsername("");
         localStorage.removeItem("accessToken");
-        history.push("/login")
+        
+         history.push("/login")
+         dispatch(Add_for_Post(1))
       })
       .catch((err) => console.log(err));
   };
@@ -69,8 +73,8 @@ function Edit() {
       .then((res) => {
         //console.log(res);
         setName("");
-        localStorage.removeItem("accessToken");
-        history.push("/login")
+        dispatch(Add_for_Post(1))
+        history.push("/")
       })
       .catch((err) => console.log(err));
   };

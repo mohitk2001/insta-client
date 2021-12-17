@@ -7,19 +7,54 @@ import axios from "./axios.js";
 import { AuthContext } from "./Context.js";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import $ from "jquery"
+import $ from "jquery";
+import redux_data from "../Redux/Reducer/Add_details";
+import { useSelector } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
+  const [logged_user, setlogged_user] = useState(
+    useSelector((state) => state.redux_data)
+  );
+  console.log(logged_user);
   const [count, setCount] = useState(0);
   const history = useHistory();
   const [comment, setcomment] = useState("");
   const { isLogged } = useContext(AuthContext);
 
   useEffect(() => {}, [count]);
-  const handleLike=(id)=>{
-   
-    $(id).toggleClass("likeStyle");
-  }
+  const handleLike = (id) => {
+    $(`.${id}`).toggleClass("likeStyle");
+    //like request here
+    if( $(`.${id}`).hasClass("likeStyle")){
+      axios
+      .put(
+        "/post/liked",
+        { logged_user,id },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+      //unlike request here
+      else if( !$(`.${id}`).hasClass("likeStyle")){
+        axios
+        .put(
+          "/post/unliked",
+          { logged_user,id },
+          { headers: { accessToken: localStorage.getItem("accessToken") } }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+  };
   const postCommt = () => {
     const obj = {
       text: comment,
@@ -46,6 +81,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
     }
     setcomment("");
   };
+
   return (
     <div className="post">
       <div className="post_header">
@@ -62,8 +98,8 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
 
       <div className="post_bottom_section">
         <div className="post_react">
-          <IconButton  onClick={()=>handleLike(id)}>
-            <FavoriteBorderIcon className={id}/>
+          <IconButton onClick={() => handleLike(id)}>
+            <FavoriteBorderIcon className={id} />
           </IconButton>
           <IconButton onClick={() => history.push(`/specific_post/${id}`)}>
             <ChatBubbleOutlineRoundedIcon />
