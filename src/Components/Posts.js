@@ -8,20 +8,30 @@ import { AuthContext } from "./Context.js";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import $ from "jquery";
+import { useDispatch } from "react-redux";
 import redux_data from "../Redux/Reducer/Add_details";
+import { Add_for_Post } from "../Redux/Action";
 import { useSelector } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
-function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
+function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
   const [logged_user, setlogged_user] = useState(
     useSelector((state) => state.redux_data)
   );
-  console.log(logged_user);
-  const [count, setCount] = useState(0);
+  const singlePost=useSelector((state)=>state.add_Reducer);
+  useEffect(() => {
+   likes?.map((like,index)=>{
+     if(like.userid_liked===logged_user._id){
+       
+       $(`.${id}`).toggleClass("likeStyle");
+     }
+   })
+  }, [singlePost])
+  const dispatch=useDispatch();
+  
   const history = useHistory();
   const [comment, setcomment] = useState("");
   const { isLogged } = useContext(AuthContext);
 
-  useEffect(() => {}, [count]);
   const handleLike = (id) => {
     $(`.${id}`).toggleClass("likeStyle");
     //like request here
@@ -34,6 +44,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
       )
       .then((res) => {
         console.log(res);
+        dispatch(Add_for_Post(1));
       })
       .catch((err) => {
         console.log(err);
@@ -49,6 +60,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
         )
         .then((res) => {
           console.log(res);
+          dispatch(Add_for_Post(1));
         })
         .catch((err) => {
           console.log(err);
@@ -69,9 +81,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
         })
         .then((res) => {
           //console.log(res);
-          setCount((count) => {
-            return count + 1;
-          });
+          dispatch(Add_for_Post(1));
         })
         .catch((err) => {
           console.log(err);
@@ -105,7 +115,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url }) {
             <ChatBubbleOutlineRoundedIcon />
           </IconButton>
         </div>
-        {caption !== "" && (
+          {caption !== "" && (
           <p>
             <strong>{username}: </strong>
             <span>{caption}</span>

@@ -54,6 +54,7 @@ function App() {
                         comments={post?.comments}
                         id={post?._id}
                         avatar_url={post?.avatar_post}
+                        likes={post?.likes}
                       />
                     );
                   })}
