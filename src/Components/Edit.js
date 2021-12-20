@@ -34,9 +34,16 @@ function Edit() {
               { imgurl: res.data.secure_url,id:isLogged.id },
               { headers: { accessToken: localStorage.getItem("accessToken") } }
             ).then((response)=>{
-              //  console.log(response)
-                localStorage.removeItem("accessToken");
-                history.push("/login")
+               // console.log(response)
+                if(!response.data.error){
+                  alert(response.data.message);
+                  //localStorage.removeItem("accessToken");
+                  history.push("/")
+                  dispatch(Add_for_Post(1))
+                }
+                else if(response.data.error){
+                  alert(response.data.error)
+                }
             })
             .catch((err)=>{
                 console.log(err)
@@ -56,10 +63,16 @@ function Edit() {
       .then((res) => {
         //console.log(res);
         setUsername("");
-        localStorage.removeItem("accessToken");
+        if(!res.data.error){
+          alert(res.data.message)
+          //localStorage.removeItem("accessToken");
+          history.push("/")
+          dispatch(Add_for_Post(1))
+        }
+        else if(res.data.error){
+          alert(res.data.error)
+        }
         
-         history.push("/login")
-         dispatch(Add_for_Post(1))
       })
       .catch((err) => console.log(err));
   };
@@ -71,10 +84,16 @@ function Edit() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((res) => {
-        //console.log(res);
+       // console.log(res);
         setName("");
-        dispatch(Add_for_Post(1))
-        history.push("/")
+        if(!res.data.error){
+          alert(res.data.message)
+          dispatch(Add_for_Post(1))
+          history.push("/")
+        }
+        else if(res.data.error){
+          alert(res.data.error)
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -88,8 +107,14 @@ function Edit() {
       .then((res) => {
         //console.log(res);
         setEmail("");
-        localStorage.removeItem("accessToken");
-        history.push("/login")
+        if(!res.data.error){
+          alert(res.data.message)
+          localStorage.removeItem("accessToken");
+          history.push("/login")
+        }
+        else if(res.data.error){
+          alert(res.data.error)
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -101,7 +126,7 @@ function Edit() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((res) => {
-       // console.log(res);
+        console.log(res);
         if (res.data.error) {
           alert(res.data.error);
         } else {

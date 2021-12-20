@@ -20,14 +20,26 @@ function Allcomments() {
   const { isLogged } = useContext(AuthContext);
   const [countComment, setcountComment] = useState("");
   const similar = useSelector((state) => state.redux_data);
-
+ 
   const myRef = useRef(null);
   const executeScroll = () => scrollToRef(myRef);
+  const  isLikedIdMatchWithLoggedUser=(likesData)=>{
+    console.log(likesData)
+    likesData?.map((like)=>{
+      if(similar._id===like.userid_liked){
+        $("#likes").attr("class","allcomments_likeStyle");
+        return;
+      }
+    })
+
+  }
   useEffect(() => {
     axios
       .get(`/post/postById/${id}`)
       .then((res) => {
         if (!res.data.error) {
+          console.log(res.data)
+          isLikedIdMatchWithLoggedUser(res.data.likes);
           setpost_Details(res.data);
           console.log(res.data);
         }
@@ -84,7 +96,7 @@ function Allcomments() {
       </div>
       <center>
         <div className="allcomments_react">
-          <IconButton>
+          <IconButton id="likes">
             <FavoriteBorderIcon fontSize="large" className="onSmallsc"/>
           </IconButton>
 

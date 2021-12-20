@@ -72,7 +72,9 @@
     color: #6082a3;
     cursor: pointer;
 }
-
+.allcomments_likeStyle{
+    color: red !important;
+}
 @media only screen and (max-width: 320px){
     .users_details_top > h2{
         font-weight: 400;

@@ -17,7 +17,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
   const [logged_user, setlogged_user] = useState(
     useSelector((state) => state.redux_data)
   );
-  const singlePost=useSelector((state)=>state.add_Reducer);
+  //const singlePost=useSelector((state)=>state.add_Reducer);
   useEffect(() => {
    likes?.map((like,index)=>{
      if(like.userid_liked===logged_user._id){
@@ -25,7 +25,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
        $(`.${id}`).toggleClass("likeStyle");
      }
    })
-  }, [singlePost])
+  }, [])
   const dispatch=useDispatch();
   
   const history = useHistory();
@@ -33,6 +33,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
   const { isLogged } = useContext(AuthContext);
 
   const handleLike = (id) => {
+    console.log( $(`.${id}`).hasClass("likeStyle"));
     $(`.${id}`).toggleClass("likeStyle");
     //like request here
     if( $(`.${id}`).hasClass("likeStyle")){
