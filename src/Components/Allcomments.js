@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import EditIcon from "@material-ui/icons/Edit";
 import EditSlider from "./EditSlider";
 import $ from "jquery";
+import { Add_for_Post } from "../Redux/Action";
+import { useDispatch } from "react-redux";
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 function Allcomments() {
   const { id } = useParams();
@@ -20,7 +22,7 @@ function Allcomments() {
   const { isLogged } = useContext(AuthContext);
   const [countComment, setcountComment] = useState("");
   const similar = useSelector((state) => state.redux_data);
- 
+  const dispatch=useDispatch();
   const myRef = useRef(null);
   const executeScroll = () => scrollToRef(myRef);
   const  isLikedIdMatchWithLoggedUser=(likesData)=>{
@@ -48,6 +50,41 @@ function Allcomments() {
         console.log(err);
       });
   }, [countComment]);
+  const handleLikes=(id)=>{
+    const logged_user=similar;
+    if($("#likes").hasClass("allcomments_likeStyle")){
+      $("#likes").removeAttr("class","allcomments_likeStyle");
+      axios
+        .patch(
+          "/post/unliked",
+          { logged_user,id },
+          { headers: { accessToken: localStorage.getItem("accessToken") } }
+        )
+        .then((res) => {
+          console.log(res);
+          dispatch(Add_for_Post(1));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else if(!$("#likes").hasClass("allcomments_likeStyle")){
+      $("#likes").attr("class","allcomments_likeStyle");
+      axios
+        .patch(
+          "/post/liked",
+          { logged_user,id },
+          { headers: { accessToken: localStorage.getItem("accessToken") } }
+        )
+        .then((res) => {
+          console.log(res);
+          dispatch(Add_for_Post(1));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
   const postCommt = () => {
     const obj = {
       text: comment,
@@ -73,7 +110,6 @@ function Allcomments() {
     setcomment("");
   };
   const handleEdit = () => {
-   
     $(".allcomments").attr("id","backBlur");
     $(".editSlider").toggleClass("active")
   };
@@ -96,7 +132,7 @@ function Allcomments() {
       </div>
       <center>
         <div className="allcomments_react">
-          <IconButton id="likes">
+          <IconButton id="likes" onClick={()=>handleLikes(id)}>
             <FavoriteBorderIcon fontSize="large" className="onSmallsc"/>
           </IconButton>
 

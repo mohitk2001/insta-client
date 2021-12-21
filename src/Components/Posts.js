@@ -38,7 +38,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
     //like request here
     if( $(`.${id}`).hasClass("likeStyle")){
       axios
-      .put(
+      .patch(
         "/post/liked",
         { logged_user,id },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
@@ -54,7 +54,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
       //unlike request here
       else if( !$(`.${id}`).hasClass("likeStyle")){
         axios
-        .put(
+        .patch(
           "/post/unliked",
           { logged_user,id },
           { headers: { accessToken: localStorage.getItem("accessToken") } }

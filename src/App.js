@@ -23,7 +23,7 @@ function App() {
     id: "",
     loginstatus: false,
   });
-  const reduxDetails=useSelector((state)=>console.log(state))
+  const reduxDetails=useSelector((state)=>state.redux_data)
   useEffect(() => {
     axios
       .get("/post/")
