@@ -22,7 +22,7 @@ function Header() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((res) => {
-        console.log(res.data)
+        //console.log(res.data)
         if (res.data.error) {
           setIslogged({ ...isLogged, loginstatus: false });
         } else if (!res.data.error) {
@@ -37,7 +37,7 @@ function Header() {
         console.log(err);
       });
       if(localStorage.getItem("accessToken")){
-        console.log(isLogged)
+        //console.log(isLogged)
         dispatch(add_details(isLogged))
       }
   }, [isLogged.loginstatus]);

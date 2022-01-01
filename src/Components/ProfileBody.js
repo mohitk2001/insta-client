@@ -16,7 +16,7 @@ function ProfileBody() {
       axios
         .get(`/post/getAllposts/${isLogged.id}`)
         .then((res) => {
-          console.log(res.data);
+         // console.log(res.data);
           setpostBlock(res.data);
         })
         .catch((err) => {

@@ -26,7 +26,7 @@ function Allcomments() {
   const myRef = useRef(null);
   const executeScroll = () => scrollToRef(myRef);
   const  isLikedIdMatchWithLoggedUser=(likesData)=>{
-    console.log(likesData)
+    //console.log(likesData)
     likesData?.map((like)=>{
       if(similar._id===like.userid_liked){
         $("#likes").attr("class","allcomments_likeStyle");
@@ -40,10 +40,10 @@ function Allcomments() {
       .get(`/post/postById/${id}`)
       .then((res) => {
         if (!res.data.error) {
-          console.log(res.data)
+          //console.log(res.data)
           isLikedIdMatchWithLoggedUser(res.data.likes);
           setpost_Details(res.data);
-          console.log(res.data);
+         // console.log(res.data);
         }
       })
       .catch((err) => {

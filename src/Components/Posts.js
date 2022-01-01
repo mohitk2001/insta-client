@@ -44,11 +44,11 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((res) => {
-        console.log(res);
+       // console.log(res);
         dispatch(Add_for_Post(1));
       })
       .catch((err) => {
-        console.log(err);
+       // console.log(err);
       });
     }
       //unlike request here
@@ -60,7 +60,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
           { headers: { accessToken: localStorage.getItem("accessToken") } }
         )
         .then((res) => {
-          console.log(res);
+          //console.log(res);
           dispatch(Add_for_Post(1));
         })
         .catch((err) => {
