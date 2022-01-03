@@ -33,7 +33,7 @@ function Posts({ imgUrl, username, caption, comments, id, avatar_url ,likes}) {
   const { isLogged } = useContext(AuthContext);
 
   const handleLike = (id) => {
-    console.log( $(`.${id}`).hasClass("likeStyle"));
+    // console.log( $(`.${id}`).hasClass("likeStyle"));
     $(`.${id}`).toggleClass("likeStyle");
     //like request here
     if( $(`.${id}`).hasClass("likeStyle")){

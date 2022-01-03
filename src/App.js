@@ -14,6 +14,7 @@ import ProfileBody from "./Components/ProfileBody";
 import Upload from "./Components/Upload";
 import { useSelector } from "react-redux";
 
+
 function App() {
   const [posts, setPosts] = useState([]);
   const mycounts=useSelector((state)=>state.add_Reducer)
@@ -28,7 +29,7 @@ function App() {
     axios
       .get("/post/")
       .then((res) => {
-        console.log(res.data);
+       // console.log(res.data);
         setPosts(res.data);
       })
       .catch((err) => {

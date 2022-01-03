@@ -3,15 +3,13 @@ import "./Header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./Context";
-import {add_details} from "../Redux/Action/index"
+import { add_details } from "../Redux/Action/index";
 import { useDispatch } from "react-redux";
 
 import axios from "./axios.js";
 function Header() {
   const { isLogged, setIslogged } = useContext(AuthContext);
-  const dispatch=useDispatch()
-  
-  
+  const dispatch = useDispatch();
   const history = useHistory();
   if (localStorage.getItem("accessToken") === null) {
     history.push("/login");
@@ -36,12 +34,12 @@ function Header() {
       .catch((err) => {
         console.log(err);
       });
-      if(localStorage.getItem("accessToken")){
-        //console.log(isLogged)
-        dispatch(add_details(isLogged))
-      }
+    if (localStorage.getItem("accessToken")) {
+      //console.log(isLogged)
+      dispatch(add_details(isLogged));
+    }
   }, [isLogged.loginstatus]);
- 
+
   const logout = () => {
     localStorage.removeItem("accessToken");
     setIslogged({

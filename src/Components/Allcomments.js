@@ -77,7 +77,7 @@ function Allcomments() {
           { headers: { accessToken: localStorage.getItem("accessToken") } }
         )
         .then((res) => {
-          console.log(res);
+         // console.log(res);
           dispatch(Add_for_Post(1));
         })
         .catch((err) => {

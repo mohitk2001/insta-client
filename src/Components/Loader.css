@@ -1,0 +1,41 @@
+.loader {
+  width: 70px;
+  z-index: 100;
+  display:none;
+  height: 70px;
+  background-color:transparent;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: 5px solid darkblue;
+  border-left-color: transparent;
+  animation-name: spin;
+  animation-duration: 3s;/*Specifies the length of time an animation should take to complete one cycle*/
+  animation-iteration-count: infinite;/*	Specifies that the animation should be played infinite times (for ever)*/
+  animation-timing-function: linear;/*The animation has the same speed from start to end*/
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+.activeLoader{
+    display: block; 
+}
