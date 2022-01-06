@@ -27,7 +27,7 @@ function App() {
   const reduxDetails=useSelector((state)=>state.redux_data)
   useEffect(() => {
     axios
-      .get("/post/")
+      .get("/post/all")
       .then((res) => {
        // console.log(res.data);
         setPosts(res.data);

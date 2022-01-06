@@ -27,6 +27,8 @@ function Authentication() {
       .then((res) => {
         if (res.data.error) {
           alert(res.data.error);
+          $(".loader").removeClass("activeLoader");
+          $(".auth").removeAttr("id", "whenlodingbackBlur");
         } else if (!res.data.error) {
           localStorage.setItem("accessToken", res.data.auth_token);
           setIslogged({

@@ -52,6 +52,8 @@ function Edit() {
                   dispatch(Add_for_Post(1));
                 } else if (response.data.error) {
                   alert(response.data.error);
+                  $(".loader").removeClass("activeLoader");
+                  $(".edit").removeAttr("id", "whenlodingbackBlur");
                 }
               })
               .catch((err) => {
@@ -82,6 +84,8 @@ function Edit() {
           dispatch(Add_for_Post(1));
         } else if (res.data.error) {
           alert(res.data.error);
+          $(".loader").removeClass("activeLoader");
+          $(".edit").removeAttr("id", "whenlodingbackBlur");
         }
       })
       .catch((err) => console.log(err));
@@ -106,6 +110,8 @@ function Edit() {
           history.push("/");
         } else if (res.data.error) {
           alert(res.data.error);
+          $(".loader").removeClass("activeLoader");
+          $(".edit").removeAttr("id", "whenlodingbackBlur");
         }
       })
       .catch((err) => console.log(err));
